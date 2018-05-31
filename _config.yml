@@ -3,31 +3,17 @@
 permalink: /:categories/:year/:month/:day/:title 
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-highlighter: pygments
+pygments: true
 
-# Themes are encouraged to use these universal variables 
-# so be sure to set them if your theme uses them.
-#
-title : Jekyll Bootstrap
-tagline: Site Tagline
+title : Xingxin's Blog
+
 author :
-  name : Name Lastname
-  email : blah@email.test
-  github : username
-  twitter : username
-  feedburner : feedname
+  name : Xingxin Zeng
+  email : zeng_xing_xin@foxmail.com
+  github : SBeator
+  url: https://github.com/SBeator
 
-# The production_url is only used when full-domain names are needed
-# such as sitemap.txt 
-# Most places will/should use BASE_PATH to make the urls
-#
-# If you have set a CNAME (pages.github.com) set your custom domain here.
-# Else if you are pushing to username.github.io, replace with your username.
-# Finally if you are pushing to a GitHub project page, include the project name at the end.
-#
-production_url : http://username.github.io
-
-gems: ["jekyll-sitemap"]
+markdown: kramdown
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -66,7 +52,7 @@ JB :
   #   http://s3.amazonaws.com/yoursite/themes/watermelon
   #   /assets
   #
-  ASSET_PATH : false
+ # ASSET_PATH : /assets/themes/twitter
 
   # These paths are to the main pages Jekyll-Bootstrap ships with.
   # Some JB helpers refer to these paths; change them here if needed.
@@ -94,17 +80,13 @@ JB :
       num_posts: 5
       width: 580
       colorscheme: light
-    duoshuo :
-      short_name : jekyllbootstrap
    
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
   # Set 'provider' to false to turn analytics off globally.
   #        
   analytics :
-    provider : google
-    gauges :
-        site_id : 'SITE ID'
+    provider : google 
     google : 
         tracking_id : 'UA-123-12'
     getclicky :
@@ -133,6 +115,5 @@ JB :
   # and include your custom code. Your custom file must be defined at:
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
-  
+  theme: jekyll-theme-architect
 
-theme: jekyll-theme-architect

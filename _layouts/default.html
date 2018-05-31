@@ -1,6 +1,22 @@
 ---
 theme :
-  name : bootstrap-3
+  name : jekyll-theme-architect
 ---
-{% include JB/setup %}
-{% include themes/bootstrap-3/default.html %}
+<!DOCTYPE html>
+<html lang="{{ site.locale }}">
+
+  {% include head.html %}
+
+  <body>
+    {% include page-header.html %}
+
+    <section class="main-content">
+
+      {{ content }}
+
+      {% include page-footer.html %}
+
+    </section>
+
+  </body>
+</html>
