@@ -25,7 +25,7 @@ avatar: '/assets/img/myimage.jpg'
 search: true
 
 # Night mode
-nightMode: true
+nightMode: false
 
 # Comments 评论功能
 # comments:

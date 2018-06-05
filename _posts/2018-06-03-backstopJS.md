@@ -23,8 +23,7 @@ tags: BackstopJS css 测试 visual-regression-testing
 
 - 快速上手
 - 测试代码简单
-- 内置很多功能
-- 扩展功能强大
+- 多种即开即用功能
 
 ## 快速上手
 
@@ -56,7 +55,9 @@ tags: BackstopJS css 测试 visual-regression-testing
    backstop test
    ```
 
-   然后你可以在命令行中或者自动打开的HTML页面中看到测试结果。
+   然后你可以在命令行中或者自动打开的HTML页面中看到测试结果。由于这个时候我们的基线图都还没有生成，因此我们会看到测试失败的报告，你可以在每个测试用例的报告下面看到具体的失败原因：
+
+   ![测试失败](/assets/img/backstopjs/backstopjs_report_failed.png)
 
 4. 更新基线图
 
@@ -72,7 +73,11 @@ tags: BackstopJS css 测试 visual-regression-testing
    baskstop reference
    ```
 
-好了，这就是创建一个`BackstopJS`测试工程的整个流程，事实上就是几个命令，非常好上手。
+   在你的基线图更新之后，重新运行一次测试，你就可以看到测试通过的报告了：![测试成功](/assets/img/backstopjs/backstopjs_report.png)
+
+好了，这就是我们创建一个`BackstopJS`测试工程的所有步骤了，接下来我们可以尝试修改一下测试页面，看看当测试页面和基线图有差异时测试报告会长什么样子：
+
+![测试有差异](/assets/img/backstopjs/backstopjs_report_diff.png)
 
 ## 测试代码简单
 
@@ -133,9 +138,9 @@ tags: BackstopJS css 测试 visual-regression-testing
 
 现在，我的新页面已经被视觉回归测试覆盖了，我可以放心地提交代码了。
 
-## 内置很多功能
+## 多种即开即用功能
 
-当然，在实际地工作中一个测试用例不会总是直接地截取一个完整地页面，而可能只是截图页面中的一部分，或者在截图之前需要进行一些其他的操作。而`BackstopJS`也考虑到了这个问题，因此可以很方便地支持一些常用功能：
+当然，在实际地工作中一个测试用例不会总是直接地截取一个完整地页面，而可能只是截图页面中的一部分，或者在截图之前需要进行一些其他的操作。而`BackstopJS`也考虑到了这个问题，因而支持很多即开即用的功能：
 
 ### 截取特定的部分
 
@@ -165,13 +170,13 @@ tags: BackstopJS css 测试 visual-regression-testing
   "scenarios": [
     {
       "label": "Click test",
-      "url": "https://garris.github.io/BackstopJS/",
+      "url": "https://garris.github.io/BackstopJS/?click",
       "clickSelector": '#theLemur',
       "postInteractionWait": "._the_lemur_is_ready_to_see_you"
     },
     {
       "label": "Hover test",
-      "url": "https://garris.github.io/BackstopJS/",
+      "url": "https://garris.github.io/BackstopJS/?click",
       "hoverSelector": '#theLemur',
       "postInteractionWait": 1000
     }
@@ -179,3 +184,84 @@ tags: BackstopJS css 测试 visual-regression-testing
 ```
 
 这两个测试用例分别测试了当元素`theLemur`在被点击后和被鼠标悬浮后的页面。
+
+### 设置截图前的等待
+
+很多时候，我们的页面是需要等待一段时间才能显示正确的内容的，比如如果我们的页面使用的是React或者Vue这种前框框架加载的话，很多时候我们需要等待这些前端JS执行完毕才能开始截图。而`BackstopJS`提供了几种设置等待的方式。
+
+- `readySelector`：可以指定一个css选择器，`BackstopJS`会在这个选择器选择到的元素存在时才开始截图。
+
+  ```json
+  "scenarios": [
+      {
+        "label": "readySelector",
+        "url": "https://garris.github.io/BackstopJS/?delay",
+        "readySelector": "._the_lemur_is_ready_to_see_you",
+      },
+    ],
+  ```
+
+  这个测试用例会等待有class`_the_lemur_is_ready_to_see_you`的元素出现时才开始截图。
+
+- `readyEvent`: 可以指定一个字符串，当浏览器的控制台中出现这个字符串时才开始截图。
+
+  ```json
+  "scenarios": [
+      {
+        "label": "readyEvent",
+        "url": "https://garris.github.io/BackstopJS/?delay",
+        "readyEvent": "_the_lemur_is_ready_to_see_you",
+      },
+    ],
+  ```
+
+  这个测试用例会等待你的网页的控制台中出现字符串_the_lemur_is_ready_to_see_you时，也就是当你的页面指定到代码`console.log('the_lemur_is_ready_to_see_you')`时才开始截图。
+
+- `delay`: 这是最好理解的一种等待方式，只需要设置一个时间（单位为毫秒），测试会在页面加载好之后等待这个时间，才开始截图。
+
+  ```json
+  "scenarios": [
+      {
+        "label": "delay",
+        "url": "https://garris.github.io/BackstopJS/?delay",
+        "delay": 5000,
+      },
+    ],
+  ```
+
+  这个测试用例会在页面加载好5秒后在开始截图。
+
+### 隐藏某些元素
+
+在很多情况，我们的网页会有一些动态的元素，它在我们每一访问的时候都是不一样的，比如网站上的广告。在测试这种页面时，我们需要在每次进行视觉回归测试时mock这个动态的元素，或者更简单的方式，直接隐藏这个元素。
+
+`BackstopJS`提供了两种隐藏元素的方式：`hideSelectors`和`removeSelectors`。`hideSelectors`会给元素加上css样式`visibility:hidden`，而`removeSelectors`会直接将元素移除掉。例如：
+
+```json
+"scenarios": [
+    {
+      "label": "hideSelectors",
+      "url": "https://garris.github.io/BackstopJS/",
+      "hideSelectors": [".logo-link", "p"]
+    },
+    {
+      "label": "removeSelectors",
+      "url": "https://garris.github.io/BackstopJS/",
+      "removeSelectors": [".logo-link", "p"]
+    },
+  ],
+
+```
+
+这两个测试用例的截图中都不再有满足css选择器`.logo-link`和`p`元素。测试用例`hideSelectors`中这些元素只是被隐藏了，页面的其他部分并没有发生变化。而测试用例`removeSelectors`中其他的元素会挤过来占据这些元素原来的空间。
+
+### 其他功能
+
+当然`BackstopJS`提供了更多的实用功能，我们可以在它的[github网页](https://github.com/SBeator/BackstopJS)上看到更多更全的功能。这些功能可以让我们在很容易地实现各种常用的页面操作，让我们的测试用例变得简单，也让开发可以专注于开发而不是花太多精力去学习和写测试。
+
+## 后记
+
+当然，`BackstopJS`也有一些缺点，比如支持的浏览器十分有限。但是当我们选择一个工具时，我们更应该考虑它能够解决的主要问题：如何高效地进行视觉回归测试。
+
+作为一个开发，我希望能够用最简单的方式创建测试，而不用花太多的经历去研究他们，我们也希望知道我的更改是不是可以安全地提交。这些都是`BackstopJS`可以带给我的。因此，我想说：`BackstopJS`是我心目中最好用的视觉回归测试工具。
+
