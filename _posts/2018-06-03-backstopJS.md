@@ -7,6 +7,8 @@ cover: '/assets/img/backstopjs.png'
 tags: BackstopJS css 测试 visual-regression-testing
 ---
 
+本文介绍了什么是视觉回归测试，并且推荐了一个很好用的测试工具[`BackstopJS`](https://garris.github.io/BackstopJS/)，讲述了`BackstopJS`的使用方法和特点。
+
 ## 视觉回归测试
 
 作为一个Web开发者，如果你还不知道视觉回归测试（`visual regression testing`），那你得赶紧补补课了。在[这篇文章](https://www.jianshu.com/p/36102b0d4b9a)中你可以快速了解视觉回归测试的简单定义。如果你感兴趣的话，可以在[这里](https://visualregressiontesting.com/)找到非常多关于是视觉回归测试的文章。
@@ -17,9 +19,7 @@ tags: BackstopJS css 测试 visual-regression-testing
 
 ## 测试工具 - BackstopJS
 
-当然，为了实现视觉回归测试，我们需要一个测试工具的帮助。现今我们有很多工具可以选择。而在这篇文章里，我想推荐一个工具，它是到目前为止，我心目中最好的视觉回归测试工具：[`BackstopJS`](https://garris.github.io/BackstopJS/)
-
-它满足了我对一个测试工具的这些要求：
+[`BackstopJS`](https://garris.github.io/BackstopJS/)就是这样的一个视觉回归测试工具，它满足了我对一个测试工具的这些要求：
 
 - 快速上手
 - 测试代码简单
