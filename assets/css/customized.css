@@ -1,0 +1,28 @@
+.fas {
+  margin-right: 4px;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  position: absolute;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  z-index: 1;
+  top: 100%;
+  background-color: #888;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 5px 10px;
+  left: 0;
+  margin: 0;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
