@@ -1,4 +1,5 @@
 /* http://prismjs.com/download.html?themes=prism-okaidia&languages=markup+css+clike+javascript+bash+coffeescript+go+java+php+python+sass+scss+swift */
+
 /**
  * okaidia theme for JavaScript, CSS and HTML
  * Loosely based on Monokai textmate theme by http://www.monokai.nl/
@@ -17,11 +18,9 @@ pre[class*="language-"] {
 	word-break: normal;
 	word-wrap: normal;
 	line-height: 1.5;
-
 	-moz-tab-size: 4;
 	-o-tab-size: 4;
 	tab-size: 4;
-
 	-webkit-hyphens: none;
 	-moz-hyphens: none;
 	-ms-hyphens: none;
@@ -29,6 +28,7 @@ pre[class*="language-"] {
 }
 
 /* Code blocks */
+
 pre[class*="language-"] {
 	padding: 1em;
 	margin: .5em 0;
@@ -36,13 +36,14 @@ pre[class*="language-"] {
 	border-radius: 0.3em;
 }
 
-:not(pre) > code[class*="language-"],
+:not(pre)>code[class*="language-"],
 pre[class*="language-"] {
 	background: #272822;
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
+
+:not(pre)>code[class*="language-"] {
 	padding: .1em;
 	border-radius: .3em;
 	white-space: normal;
@@ -113,6 +114,7 @@ pre[class*="language-"] {
 .token.bold {
 	font-weight: bold;
 }
+
 .token.italic {
 	font-style: italic;
 }
@@ -121,3 +123,6 @@ pre[class*="language-"] {
 	cursor: help;
 }
 
+.fas {
+	margin-right: 4px;
+}
